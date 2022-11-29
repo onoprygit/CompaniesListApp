@@ -4,6 +4,6 @@ interface RemoteDataSource{
 
 }
 
-class CompaniesRemoteDataSource{
+class CompaniesRemoteDataSource(api: CompaniesApi): RemoteDataSource{
 
 }

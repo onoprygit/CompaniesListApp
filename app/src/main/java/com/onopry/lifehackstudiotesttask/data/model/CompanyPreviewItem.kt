@@ -1,4 +1,4 @@
-package com.onopry.lifehackstudiotesttask.domain.model
+package com.onopry.lifehackstudiotesttask.data.model
 
 import com.squareup.moshi.JsonClass
 

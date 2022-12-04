@@ -7,9 +7,9 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface CompaniesApi {
-    @GET("./test.php")
-    fun fetchCompanies(): Response<List<CompanyItem>>
+    @GET("test.php")
+    suspend fun fetchCompanies(): Response<List<CompanyItem>>
 
     @GET("./test.php")
-    fun getCompanyDetails(@Query("id") id: Int): Response<CompanyDetails>
+    suspend fun getCompanyDetails(@Query("id") id: Int): Response<CompanyDetails>
 }

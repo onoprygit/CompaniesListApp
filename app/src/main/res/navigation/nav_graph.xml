@@ -7,16 +7,16 @@
 
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.onopry.lifehackstudiotesttask.app.presentation.screen.DetailsFragment"
+        android:name="com.onopry.lifehackstudiotesttask.app.presentation.screen.details.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details">
         <argument
             android:name="companyId"
-            app:argType="integer" />
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.onopry.lifehackstudiotesttask.app.presentation.screen.ListFragment"
+        android:name="com.onopry.lifehackstudiotesttask.app.presentation.screen.list.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" >
         <action

@@ -5,7 +5,7 @@ import retrofit2.HttpException
 import retrofit2.Response
 
 fun <T : Any> wrapRetrofitResponse(
-    apiRequest: () -> Response<T>
+    apiRequest: suspend () -> Response<T>
 ) = flow {
     try {
         val res = apiRequest()

@@ -11,5 +11,5 @@ interface CompaniesApi {
     suspend fun fetchCompanies(): Response<List<CompanyItem>>
 
     @GET("./test.php")
-    suspend fun getCompanyDetails(@Query("id") id: String): Response<CompanyDetails>
+    suspend fun getCompanyDetails(@Query("id") id: String): Response<List<CompanyDetails>>
 }

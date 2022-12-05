@@ -16,7 +16,7 @@ fun <T : Any> wrapRetrofitResponse(
             emit(ApiError(code = res.code(), message = res.message()))
     } catch (e: HttpException) {
         emit(ApiError(code = e.code(), message = e.message()))
-    } catch (e: Throwable) {
+    } /*catch (e: Throwable) {
         emit(ApiException(e))
-    }
+    }*/
 }

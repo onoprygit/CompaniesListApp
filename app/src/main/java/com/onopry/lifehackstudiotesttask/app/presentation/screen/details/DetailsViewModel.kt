@@ -32,7 +32,15 @@ class DetailsViewModel @Inject constructor(
             companyId?.let {
                 repository.getDetailsById(it).collect{ result ->
                     when (result) {
-                        is ApiSuccess -> screenStateMutableFlow.emit(DetailsState.Content(result.data))
+                        is ApiSuccess -> {
+                            var phone = result.data.phone
+                            var website = result.data.www
+                            if (phone == null || phone.isEmpty()) phone = "Phone not fond"
+                            if (website == null || website.isEmpty()) website = "Website not found"
+                            val newResult = result.data.copy(phone = phone, www = website)
+                            screenStateMutableFlow.emit(DetailsState.Content(newResult))
+
+                        }
                         is ApiError -> screenStateMutableFlow.emit(DetailsState.ErrorState.LoadingError(msg = result.message ?: "Unexpected error occurred"))
                         is ApiException -> screenStateMutableFlow.emit(DetailsState.ErrorState.LoadingError(msg = result.e.message ?: "Unexpected exception occurred"))
                     }

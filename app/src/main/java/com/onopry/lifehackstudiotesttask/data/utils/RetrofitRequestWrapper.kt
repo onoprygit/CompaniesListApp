@@ -4,19 +4,20 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import retrofit2.Response
 
-fun <T : Any> wrapRetrofitResponse(
+suspend fun <T : Any> wrapRetrofitRequest(
     apiRequest: suspend () -> Response<T>
-) = flow {
-    try {
+): ApiResult<T> {
+    return try {
         val res = apiRequest()
         val body = res.body()
+
         if (res.isSuccessful && body != null)
-            emit(ApiSuccess(data = body))
+            ApiSuccess(data = body)
         else
-            emit(ApiError(code = res.code(), message = res.message()))
+            ApiError(code = res.code(), message = res.message())
     } catch (e: HttpException) {
-        emit(ApiError(code = e.code(), message = e.message()))
+        ApiError(code = e.code(), message = e.message())
     } /*catch (e: Throwable) {
-        emit(ApiException(e))
+        ApiException(e)
     }*/
 }

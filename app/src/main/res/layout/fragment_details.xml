@@ -22,13 +22,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-        <ScrollView
+        <com.onopry.lifehackstudiotesttask.app.presentation.screen.view.ScrollViewWithMap
+            android:id="@+id/mapScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+<!--            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                tools:src="@drawable/ic_location_point"
+                />-->
 
             <ImageView
                 android:id="@+id/companyImage"
@@ -45,7 +52,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/base_horizontal_offset"
-                android:textSize="20sp"
+                android:textSize="28sp"
                 app:layout_constraintEnd_toEndOf="parent"
 
                 app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/base_horizontal_offset"
                 android:drawablePadding="@dimen/base_horizontal_offset"
-                android:textSize="32sp"
+                android:textSize="28sp"
                 app:drawableStartCompat="@drawable/ic_phone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/companyDescription"
@@ -69,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/base_horizontal_offset"
                 android:drawablePadding="@dimen/base_horizontal_offset"
-                android:textSize="32sp"
+                android:textSize="28sp"
                 app:drawableStartCompat="@drawable/ic_web"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/companyPhone"
@@ -80,14 +87,27 @@
                 android:id="@+id/companyLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/base_horizontal_offset"
                 android:layout_marginStart="@dimen/base_horizontal_offset"
+                android:textSize="32sp"
+                app:drawableStartCompat="@drawable/ic_company_location"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/companyWeb"
-                tools:text="lat = 546465465 lon = sadfasdf" />
+                />
+
+            <com.yandex.mapkit.mapview.MapView
+                android:id="@+id/mapView"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="@dimen/base_horizontal_offset"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/companyLocation"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </ScrollView>
+        </com.onopry.lifehackstudiotesttask.app.presentation.screen.view.ScrollViewWithMap>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

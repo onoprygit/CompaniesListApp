@@ -1,6 +1,7 @@
 package com.onopry.lifehackstudiotesttask.app.presentation.screen.details
 
 import com.onopry.lifehackstudiotesttask.data.model.CompanyDetails
+import com.onopry.lifehackstudiotesttask.data.model.CompanyDetailsResponse
 
 sealed class DetailsState {
     object Empty : DetailsState()

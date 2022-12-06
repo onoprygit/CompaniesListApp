@@ -1,6 +1,5 @@
 package com.onopry.lifehackstudiotesttask.app.presentation.screen.details
 
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -10,12 +9,9 @@ import com.bumptech.glide.Glide
 import com.onopry.lifehackstudiotesttask.R
 import com.onopry.lifehackstudiotesttask.app.presentation.utils.gone
 import com.onopry.lifehackstudiotesttask.app.presentation.utils.safeObserveFlow
-import com.onopry.lifehackstudiotesttask.app.presentation.utils.toPx
 import com.onopry.lifehackstudiotesttask.databinding.FragmentDetailsBinding
-import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
 import com.yandex.mapkit.geometry.Point
-import com.yandex.mapkit.map.CameraPosition
 import com.yandex.runtime.image.ImageProvider
 import dagger.hilt.android.AndroidEntryPoint
 

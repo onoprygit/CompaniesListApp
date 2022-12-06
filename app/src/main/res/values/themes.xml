@@ -19,4 +19,9 @@
         <item name="android:textColor">@color/text_color</item>
         <item name="android:layout_marginStart">@dimen/base_horizontal_offset</item>
     </style>
+
+    <style name="CompanyInfoText">
+        <item name="android:drawablePadding">@dimen/base_horizontal_offset</item>
+        <item name="android:textSize">26sp</item>
+    </style>
 </resources>

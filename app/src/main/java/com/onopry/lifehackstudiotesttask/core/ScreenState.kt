@@ -1,7 +1,5 @@
 package com.onopry.lifehackstudiotesttask.core
 
-import com.onopry.lifehackstudiotesttask.app.presentation.screen.list.ListState
-
 /*
 sealed class ScreenState<T>{
     sealed class Empty: ScreenState<Any>

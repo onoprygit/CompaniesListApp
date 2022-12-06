@@ -4,5 +4,8 @@
     <string name="exception_message">Oops, unexpected exception, please try later</string>
     <string name="reload_after_error_button">Try again</string>
 
-    <style name="error_message">Oops, unexpected error, please try again</style>
+    <string name="error_message">Oops, unexpected error, please try again</string>
+    <string name="phone_error_text">Phone not fond</string>
+    <string name="website_error_text">Website not found</string>
+
 </resources>

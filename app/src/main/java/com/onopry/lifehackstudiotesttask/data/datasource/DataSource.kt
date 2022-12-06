@@ -13,11 +13,11 @@ import retrofit2.HttpException
 
 interface RemoteDataSource {
     fun getCompanies(): Flow<ApiResult<List<CompanyItem>>>
-    fun getDetails(id: Int): Flow<ApiResult<CompanyDetails>>
+    fun getDetails(id: String): Flow<ApiResult<List<CompanyDetails>>>
 }
 
 class CompaniesRemoteDataSource(private val api: CompaniesApi) : RemoteDataSource {
     override fun getCompanies() = wrapRetrofitResponse { api.fetchCompanies() }
-    override fun getDetails(id: Int) = wrapRetrofitResponse { api.getCompanyDetails(id) }
+    override fun getDetails(id: String) = wrapRetrofitResponse { api.getCompanyDetails(id) }
 }
 

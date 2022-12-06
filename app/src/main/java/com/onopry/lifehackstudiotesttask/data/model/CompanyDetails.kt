@@ -2,6 +2,8 @@ package com.onopry.lifehackstudiotesttask.data.model
 
 import com.squareup.moshi.JsonClass
 
+
+
 @JsonClass(generateAdapter = true)
 data class CompanyDetails(
     val description: String,

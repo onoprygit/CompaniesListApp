@@ -1,6 +1,6 @@
 package com.onopry.lifehackstudiotesttask.data.datasource
 
-import com.onopry.lifehackstudiotesttask.data.model.CompanyDetails
+import com.onopry.lifehackstudiotesttask.data.model.CompanyDetailsResponse
 import com.onopry.lifehackstudiotesttask.data.model.CompanyItem
 import retrofit2.Response
 import retrofit2.http.GET
@@ -11,5 +11,5 @@ interface CompaniesApi {
     suspend fun fetchCompanies(): Response<List<CompanyItem>>
 
     @GET("./test.php")
-    suspend fun getCompanyDetails(@Query("id") id: String): Response<List<CompanyDetails>>
+    suspend fun getCompanyDetails(@Query("id") id: String): Response<List<CompanyDetailsResponse>>
 }

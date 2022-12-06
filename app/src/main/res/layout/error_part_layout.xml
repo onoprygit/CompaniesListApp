@@ -15,7 +15,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        android:visibility="gone"
+        />
 
     <TextView
         android:id="@+id/errorMessageTv"
@@ -29,6 +31,7 @@
         app:layout_constraintStart_toStartOf="@id/errorImage"
         app:layout_constraintTop_toTopOf="@id/errorImage"
         app:layout_constraintBottom_toBottomOf="@id/errorImage"
+        android:visibility="gone"
         tools:text="Unexpected error occurred" />
 
     <Button
@@ -36,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/reload_after_error_button"
-
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/errorImage" />

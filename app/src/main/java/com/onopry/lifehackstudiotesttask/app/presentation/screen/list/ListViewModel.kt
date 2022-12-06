@@ -32,31 +32,29 @@ class ListViewModel @Inject constructor(
         debugLog("Execute load process", tag = "ListViewModel")
         loadJob?.cancel()
         loadJob = viewModelScope.launch {
-            repository.getCompanies().collect { result ->
-                screenStateMutableFlow.emit(ListState.Loading)
-
-                when (result) {
-                    is ApiSuccess -> {
-                        isRefreshMutableStateFlow.emit(false)
-                        screenStateMutableFlow.emit(ListState.Content(companies = result.data))
-                    }
-                    is ApiError -> {
-                        isRefreshMutableStateFlow.emit(false)
-                        screenStateMutableFlow.emit(
-                            ListState.ErrorState.LoadingError(
-                                msg = "Oops, unexpected error with code ${result.code}: \n${result.message}"
-                            )
+            screenStateMutableFlow.emit(ListState.Loading)
+            when (val result = repository.getCompanies()) {
+                is ApiSuccess -> {
+                    isRefreshMutableStateFlow.emit(false)
+                    screenStateMutableFlow.emit(ListState.Content(companies = result.data))
+                }
+                is ApiError -> {
+                    isRefreshMutableStateFlow.emit(false)
+                    screenStateMutableFlow.emit(
+                        ListState.ErrorState.LoadingError(
+                            msg = "Oops, unexpected error with code ${result.code}: \n${result.message}"
                         )
-                    }
-                    is ApiException -> {
-                        isRefreshMutableStateFlow.emit(false)
-                        screenStateMutableFlow.emit(
-                            ListState.Exception(msg = "Oops, unexpected exception, please try later")
-                        )
-                    }
+                    )
+                }
+                is ApiException -> {
+                    isRefreshMutableStateFlow.emit(false)
+                    screenStateMutableFlow.emit(
+                        ListState.Exception(msg = "Oops, unexpected exception, please try later")
+                    )
                 }
             }
         }
+
         loadJob = null
     }
 

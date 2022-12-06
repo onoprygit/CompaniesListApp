@@ -1,8 +1,7 @@
 package com.onopry.lifehackstudiotesttask.core
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.findNavController
+import androidx.appcompat.app.AppCompatActivity
 import com.onopry.lifehackstudiotesttask.R
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -30,13 +30,15 @@ class DetailsViewModel @Inject constructor(
         loadJob?.cancel()
         loadJob = viewModelScope.launch {
             companyId?.let {
-                repository.getDetailsById(it).collect{ result ->
-                    when (result) {
+                when (val result = repository.getDetailsById(it)) {
                         is ApiSuccess -> {
                             var phone = result.data.phone
                             var website = result.data.www
-                            if (phone == null || phone.isEmpty()) phone = "Phone not fond"
-                            if (website == null || website.isEmpty()) website = "Website not found"
+                            var address = result.data.address
+                            if (phone == null || phone.isEmpty()) phone = "Телефон организации недоступен"
+                            if (website == null || website.isEmpty()) website = "Организация не разместила свой сайт"
+                            if (address == null || address.isEmpty()) address = "Организация не разместила свой адрес"
+
                             val newResult = result.data.copy(phone = phone, www = website)
                             screenStateMutableFlow.emit(DetailsState.Content(newResult))
 
@@ -44,7 +46,7 @@ class DetailsViewModel @Inject constructor(
                         is ApiError -> screenStateMutableFlow.emit(DetailsState.ErrorState.LoadingError(msg = result.message ?: "Unexpected error occurred"))
                         is ApiException -> screenStateMutableFlow.emit(DetailsState.ErrorState.LoadingError(msg = result.e.message ?: "Unexpected exception occurred"))
                     }
-                }
+
             }
         }
     }

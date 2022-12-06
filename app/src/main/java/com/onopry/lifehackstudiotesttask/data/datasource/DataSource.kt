@@ -1,23 +1,27 @@
 package com.onopry.lifehackstudiotesttask.data.datasource
 
-import com.onopry.lifehackstudiotesttask.data.model.CompanyDetails
+import com.onopry.lifehackstudiotesttask.data.model.CompanyDetailsResponse
 import com.onopry.lifehackstudiotesttask.data.model.CompanyItem
-import com.onopry.lifehackstudiotesttask.data.utils.ApiError
-import com.onopry.lifehackstudiotesttask.data.utils.ApiException
+import com.onopry.lifehackstudiotesttask.data.model.LocationResponse
 import com.onopry.lifehackstudiotesttask.data.utils.ApiResult
-import com.onopry.lifehackstudiotesttask.data.utils.ApiSuccess
-import com.onopry.lifehackstudiotesttask.data.utils.wrapRetrofitResponse
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import retrofit2.HttpException
+import com.onopry.lifehackstudiotesttask.data.utils.wrapRetrofitRequest
 
 interface RemoteDataSource {
-    fun getCompanies(): Flow<ApiResult<List<CompanyItem>>>
-    fun getDetails(id: String): Flow<ApiResult<List<CompanyDetails>>>
+    suspend fun getCompanies(): ApiResult<List<CompanyItem>>
+    suspend fun getDetails(id: String): ApiResult<List<CompanyDetailsResponse>>
+}
+
+interface RemoteLocationSource {
+    suspend fun getLocation(lat: Double, lon: Double): ApiResult<LocationResponse>
 }
 
 class CompaniesRemoteDataSource(private val api: CompaniesApi) : RemoteDataSource {
-    override fun getCompanies() = wrapRetrofitResponse { api.fetchCompanies() }
-    override fun getDetails(id: String) = wrapRetrofitResponse { api.getCompanyDetails(id) }
+    override suspend fun getCompanies() = wrapRetrofitRequest { api.fetchCompanies() }
+    override suspend fun getDetails(id: String) = wrapRetrofitRequest { api.getCompanyDetails(id) }
+}
+
+class LocationRemoteDataSource(private val api: LocationApi) : RemoteLocationSource {
+    override suspend fun getLocation(lat: Double, lon: Double) =
+        wrapRetrofitRequest { api.getLocationByCoordinates(lat, lon) }
 }
 

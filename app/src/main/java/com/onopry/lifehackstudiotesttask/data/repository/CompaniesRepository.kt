@@ -10,6 +10,7 @@ import com.onopry.lifehackstudiotesttask.data.utils.ApiError
 import com.onopry.lifehackstudiotesttask.data.utils.ApiException
 import com.onopry.lifehackstudiotesttask.data.utils.ApiResult
 import com.onopry.lifehackstudiotesttask.data.utils.ApiSuccess
+import com.onopry.lifehackstudiotesttask.data.utils.coordinatesIsNotBlank
 
 interface Repository {
     suspend fun getCompanies(): ApiResult<List<CompanyItem>>
@@ -27,9 +28,6 @@ class CompaniesRepository(
             is ApiError -> ApiError(code = res.code, message = res.message)
             is ApiException -> ApiException(e = res.e)
         }
-
-    private fun coordinatesIsNotBlank(lat: Double?, lon: Double?) =
-        lat != null && lon != null && lat != 0.0 && lon != 0.0
 
     private suspend fun getCompanyWithLocation(company: CompanyDetailsResponse): CompanyDetails {
         val lat = company.lat

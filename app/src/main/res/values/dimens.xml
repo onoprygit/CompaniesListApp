@@ -4,13 +4,14 @@
     <dimen name="base_horizontal_offset">20dp</dimen>
 
     <!-- Item company-->
-    <dimen name="item_padding">10dp</dimen>
+    <dimen name="item_margin_vertical">10dp</dimen>
 
     <dimen name="company_image_list_size">60dp</dimen>
     <dimen name="company_image_list_outline_width">2dp</dimen>
     <dimen name="company_image_list_radius">10dp</dimen>
 
     <dimen name="company_name_text_size">20sp</dimen>
+    <dimen name="mini_offset">8dp</dimen>
 
 
 </resources>

@@ -7,5 +7,6 @@
     <string name="error_message">Oops, unexpected error, please try again</string>
     <string name="phone_error_text">Phone not fond</string>
     <string name="website_error_text">Website not found</string>
+    <string name="address_error_text">Address not found</string>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.onopry.lifehackstudiotesttask.app.di
 
+import com.onopry.lifehackstudiotesttask.app.presentation.utils.NetworkConst
 import com.onopry.lifehackstudiotesttask.app.presentation.utils.addQueryParam
 import com.onopry.lifehackstudiotesttask.data.datasource.CompaniesApi
 import com.onopry.lifehackstudiotesttask.data.datasource.LocationApi
@@ -37,9 +38,7 @@ object NetworkModule {
     @RetrofitQualifiers.Location
     fun provideLocationOkHttpClient(interceptor: HttpLoggingInterceptor): OkHttpClient =
         OkHttpClient.Builder()
-/*            .addQueryParam("format", "json")
-            .addQueryParam("lang", "ru")*/
-            .addQueryParam("apiKey", "c036f66917984746a4fc3ae138581bb9")
+            .addQueryParam("apiKey", NetworkConst.LOCATION_API_KEY)
             .addInterceptor(interceptor)
             .build()
 
@@ -56,7 +55,7 @@ object NetworkModule {
         @RetrofitQualifiers.CompaniesInfo client: OkHttpClient
     ): Retrofit =
         Retrofit.Builder()
-            .baseUrl("https://lifehack.studio/test_task/")
+            .baseUrl(NetworkConst.COMPANY_API_ENDPOINT)
             .client(client)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
@@ -69,7 +68,7 @@ object NetworkModule {
         @RetrofitQualifiers.Location client: OkHttpClient
     ): Retrofit =
         Retrofit.Builder()
-            .baseUrl("https://api.geoapify.com/v1/geocode/")
+            .baseUrl(NetworkConst.LOCATION_ENDPOINT_URL)
             .client(client)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()

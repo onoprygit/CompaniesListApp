@@ -16,7 +16,7 @@ suspend fun <T : Any> wrapRetrofitRequest(
             ApiError(code = res.code(), message = res.message())
     } catch (e: HttpException) {
         ApiError(code = e.code(), message = e.message())
-    } /*catch (e: Throwable) {
+    } catch (e: Throwable) {
         ApiException(e)
-    }*/
+    }
 }

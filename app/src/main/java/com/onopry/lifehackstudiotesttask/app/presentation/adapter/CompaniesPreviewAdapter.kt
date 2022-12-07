@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.onopry.lifehackstudiotesttask.R
+import com.onopry.lifehackstudiotesttask.app.presentation.utils.NetworkConst
 import com.onopry.lifehackstudiotesttask.data.model.CompanyItem
 import com.onopry.lifehackstudiotesttask.databinding.ItemCompanyBinding
 
@@ -40,17 +40,16 @@ class CompaniesPreviewAdapter(private val clickListener: OnCompanyClickListener)
         diffRes.dispatchUpdatesTo(this)
     }
 
-    class Holder(val binding: ItemCompanyBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(company: CompanyItem, listener: OnCompanyClickListener){
+    class Holder(private val binding: ItemCompanyBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(company: CompanyItem, listener: OnCompanyClickListener) {
             with(binding) {
                 companyName.text = company.name
-                Glide.with(root.context)
-                    .load("https://lifehack.studio/test_task/${company.img}")
-                    .placeholder(R.drawable.placeholder_company)
+                Glide.with(binding.root.context)
+                    .load(NetworkConst.COMPANY_API_ENDPOINT + company.img)
                     .into(companyImage)
-
-                root.setOnClickListener{ listener.invoke(company.id) }
+                root.setOnClickListener { listener.invoke(company.id) }
             }
         }
     }
 }
+

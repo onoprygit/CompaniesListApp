@@ -9,6 +9,7 @@ import com.onopry.lifehackstudiotesttask.data.utils.ApiException
 import com.onopry.lifehackstudiotesttask.data.utils.ApiSuccess
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -33,6 +34,7 @@ class ListViewModel @Inject constructor(
         loadJob?.cancel()
         loadJob = viewModelScope.launch {
             screenStateMutableFlow.emit(ListState.Loading)
+            delay(1000)
             when (val result = repository.getCompanies()) {
                 is ApiSuccess -> {
                     isRefreshMutableStateFlow.emit(false)

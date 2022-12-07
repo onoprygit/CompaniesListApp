@@ -10,7 +10,7 @@ import com.onopry.lifehackstudiotesttask.app.presentation.adapter.CompaniesPrevi
 import com.onopry.lifehackstudiotesttask.app.presentation.utils.debugLog
 import com.onopry.lifehackstudiotesttask.app.presentation.utils.gone
 import com.onopry.lifehackstudiotesttask.app.presentation.utils.hide
-import com.onopry.lifehackstudiotesttask.app.presentation.utils.safeObserveFlow
+import com.onopry.lifehackstudiotesttask.app.presentation.utils.safeFlowCallScope
 import com.onopry.lifehackstudiotesttask.app.presentation.utils.show
 import com.onopry.lifehackstudiotesttask.databinding.FragmentListBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,6 +28,9 @@ class ListFragment : Fragment(R.layout.fragment_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentListBinding.bind(view)
+        binding.companiesRecycler.gone()
+        binding.shimmer.show()
+        binding.shimmer.startShimmer()
         handleScreenState()
     }
 
@@ -36,10 +39,16 @@ class ListFragment : Fragment(R.layout.fragment_list) {
             debugLog("Refresh gesture captured")
             viewModel.loadRefreshState(true)
         }
-        safeObserveFlow {
+        safeFlowCallScope {
             viewModel.isRefreshState.collectLatest { isRefreshing ->
                 debugLog("RefreshState is [$isRefreshing]")
                 binding.swipeToRefresh.isRefreshing = isRefreshing
+                if (isRefreshing) {
+                    binding.companiesRecycler.gone()
+                    binding.shimmer.show()
+                } else {
+                    binding.shimmer.gone()
+                }
             }
         }
     }
@@ -47,13 +56,12 @@ class ListFragment : Fragment(R.layout.fragment_list) {
     private fun handleScreenState() {
         binding.companiesRecycler.adapter = adapter
         setupRefresh()
-        safeObserveFlow {
+        safeFlowCallScope {
             viewModel.screenState.collect { state ->
                 when (state) {
                     is ListState.Content -> handleContentState(state)
                     is ListState.Loading -> handleLoadingState()
                     is ListState.Exception -> handleExceptionState(state)
-                    is ListState.Refreshing -> handleRefreshingState()
                     is ListState.ErrorState -> {
                         if (state is ListState.ErrorState.LoadingError) handleErrorState(state)
                     }
@@ -68,6 +76,8 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         binding.errorPart.errorMessageTv.gone()
         binding.errorPart.tryAgainButton.gone()
         binding.companiesRecycler.show()
+        binding.shimmer.stopShimmer()
+        binding.shimmer.gone()
         setupRecycler(state)
     }
 
@@ -82,10 +92,15 @@ class ListFragment : Fragment(R.layout.fragment_list) {
                 viewModel.loadRefreshState(true)
             }
         }
+        binding.shimmer.stopShimmer()
+        binding.shimmer.gone()
     }
 
     private fun handleLoadingState() {
-        binding.swipeToRefresh.isRefreshing = false
+        binding.companiesRecycler.hide()
+        binding.shimmer.startShimmer()
+        binding.shimmer.show()
+//        binding.swipeToRefresh.isRefreshing = false
     }
 
     private fun handleExceptionState(state: ListState.Exception) {
@@ -94,12 +109,6 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         binding.errorPart.errorImage.show()
         binding.errorPart.errorMessageTv.show()
         binding.errorPart.errorMessageTv.text = state.msg
-    }
-
-    private fun handleRefreshingState() {
-
-
-
     }
 
 

@@ -24,4 +24,12 @@
         <item name="android:drawablePadding">@dimen/base_horizontal_offset</item>
         <item name="android:textSize">26sp</item>
     </style>
+
+
+    <style name="ShimmerDetailsInfoText">
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_marginStart">@dimen/base_horizontal_offset</item>
+        <item name="android:background">@color/shimmer_background</item>
+    </style>
 </resources>

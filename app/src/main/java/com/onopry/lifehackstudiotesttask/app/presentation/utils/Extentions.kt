@@ -4,15 +4,17 @@ import android.content.res.Resources
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.bumptech.glide.Glide.with
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import kotlin.math.roundToInt
 
-fun Fragment.safeObserveFlow(
+fun Fragment.safeFlowCallScope(
      block: suspend () -> Unit
 ) {
     viewLifecycleOwner.lifecycleScope.launch {

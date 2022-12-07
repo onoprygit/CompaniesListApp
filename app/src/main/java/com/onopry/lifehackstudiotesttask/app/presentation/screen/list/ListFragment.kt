@@ -62,9 +62,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
                     is ListState.Content -> handleContentState(state)
                     is ListState.Loading -> handleLoadingState()
                     is ListState.Exception -> handleExceptionState(state)
-                    is ListState.ErrorState -> {
-                        if (state is ListState.ErrorState.LoadingError) handleErrorState(state)
-                    }
+                    is ListState.Error -> handleErrorState(state.msg)
 
                 }
             }
@@ -81,14 +79,14 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         setupRecycler(state)
     }
 
-    private fun handleErrorState(state: ListState.ErrorState.LoadingError) {
+    private fun handleErrorState(msg: String) {
         binding.companiesRecycler.hide()
         binding.shimmer.stopShimmer()
         binding.shimmer.gone()
         with(binding.errorPart) {
             errorImage.show()
             errorMessageTv.show()
-            errorMessageTv.text = state.msg
+            errorMessageTv.text = msg
             tryAgainButton.show()
             tryAgainButton.setOnClickListener {
                 viewModel.loadRefreshState(true)
@@ -106,7 +104,7 @@ class ListFragment : Fragment(R.layout.fragment_list) {
         binding.companiesRecycler.gone()
         binding.shimmer.startShimmer()
         binding.shimmer.show()
-//        binding.swipeToRefresh.isRefreshing = false
+        //        binding.swipeToRefresh.isRefreshing = false
     }
 
     private fun handleExceptionState(state: ListState.Exception) {

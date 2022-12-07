@@ -7,7 +7,5 @@ sealed class ListState {
     object Loading : ListState()
     class Content(val companies: List<CompanyItem>) : ListState()
     class Exception(val msg: String) : ListState()
-    sealed class ErrorState : ListState() {
-        class LoadingError(val msg: String) : ErrorState()
-    }
+    class Error(val msg: String) : ListState()
 }

@@ -7,7 +7,5 @@ sealed class DetailsState {
     object Loading : DetailsState()
     class Content(val company: CompanyDetails) : DetailsState()
     class Exception(val msg: String) : DetailsState()
-    sealed class ErrorState : DetailsState() {
-        class LoadingError(val msg: String) : ErrorState()
-    }
+    class Error(val msg: String) : DetailsState()
 }

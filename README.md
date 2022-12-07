@@ -8,3 +8,4 @@
  - Clean Arch
  - Navigation Component
  - Hilt
+ - YandexMapKit(primitive)

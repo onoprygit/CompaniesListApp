@@ -1,5 +1,6 @@
 package com.onopry.lifehackstudiotesttask.app.presentation.screen.details
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.onopry.lifehackstudiotesttask.data.repository.Repository
@@ -50,11 +51,13 @@ class DetailsViewModel @Inject constructor(
                             result.data.copy(phone = phone, www = website, address = address)
                         screenStateMutableFlow.emit(DetailsState.Content(newResult))
                     }
-                    is ApiError -> screenStateMutableFlow.emit(
-                        DetailsState.ErrorState.LoadingError(
-                            msg = result.message ?: "Unexpected error occurred"
+                    is ApiError -> {
+                        screenStateMutableFlow.emit(
+                            DetailsState.ErrorState.LoadingError(
+                                msg = "Unexpected error: ${result.message} with code: ${result.code}"
+                            )
                         )
-                    )
+                    }
                     is ApiException -> screenStateMutableFlow.emit(
                         DetailsState.ErrorState.LoadingError(
                             msg = result.e.message ?: "Unexpected exception occurred"

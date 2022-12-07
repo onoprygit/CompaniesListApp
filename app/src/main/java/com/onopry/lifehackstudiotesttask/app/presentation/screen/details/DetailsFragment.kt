@@ -127,7 +127,8 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
     }
 
     private fun handleErrorState(errorMessage: String) {
-        binding.contentLayout.hide()
+        binding.contentLayout.gone()
+        binding.shimmerPlace.shimmer.gone()
         with(binding.errorPart) {
             errorImage.show()
             errorMessageTv.show()

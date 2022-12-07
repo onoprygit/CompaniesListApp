@@ -83,6 +83,8 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
     private fun handleErrorState(state: ListState.ErrorState.LoadingError) {
         binding.companiesRecycler.hide()
+        binding.shimmer.stopShimmer()
+        binding.shimmer.gone()
         with(binding.errorPart) {
             errorImage.show()
             errorMessageTv.show()
@@ -97,7 +99,11 @@ class ListFragment : Fragment(R.layout.fragment_list) {
     }
 
     private fun handleLoadingState() {
-        binding.companiesRecycler.hide()
+        binding.errorPart.errorImage.gone()
+        binding.errorPart.errorMessageTv.gone()
+        binding.errorPart.tryAgainButton.gone()
+
+        binding.companiesRecycler.gone()
         binding.shimmer.startShimmer()
         binding.shimmer.show()
 //        binding.swipeToRefresh.isRefreshing = false
@@ -105,6 +111,8 @@ class ListFragment : Fragment(R.layout.fragment_list) {
 
     private fun handleExceptionState(state: ListState.Exception) {
         binding.companiesRecycler.hide()
+        binding.shimmer.stopShimmer()
+        binding.shimmer.gone()
         binding.errorPart.tryAgainButton.gone()
         binding.errorPart.errorImage.show()
         binding.errorPart.errorMessageTv.show()

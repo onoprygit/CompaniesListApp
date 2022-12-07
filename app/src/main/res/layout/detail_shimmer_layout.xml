@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/shimmer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="ContentDescription">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/shimmerCompanyImage"
+                android:layout_width="0dp"
+                android:layout_height="300dp"
+                android:layout_marginHorizontal="@dimen/base_horizontal_offset"
+                android:layout_marginTop="@dimen/mini_offset"
+                android:background="@color/shimmer_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/shimmerCompanyDescription"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginHorizontal="@dimen/base_horizontal_offset"
+                android:layout_marginTop="20dp"
+                android:background="@color/shimmer_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmerCompanyImage" />
+
+            <TextView
+                android:id="@+id/shimmerCompanyPhone"
+                style="@style/ShimmerDetailsInfoText"
+                android:layout_marginTop="@dimen/base_horizontal_offset"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmerCompanyDescription" />
+
+            <TextView
+                android:id="@+id/shimmerCompanyWeb"
+                style="@style/ShimmerDetailsInfoText"
+                android:layout_marginTop="@dimen/mini_offset"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmerCompanyPhone" />
+
+            <TextView
+                android:id="@+id/shimmerCompanyLocation"
+                style="@style/ShimmerDetailsInfoText"
+                android:layout_marginTop="@dimen/mini_offset"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmerCompanyWeb" />
+
+            <com.yandex.mapkit.mapview.MapView
+                android:id="@+id/shimmerMapView"
+                android:layout_width="0dp"
+                android:layout_height="250dp"
+                android:layout_marginHorizontal="@dimen/base_horizontal_offset"
+                android:layout_marginTop="@dimen/base_horizontal_offset"
+                android:background="@color/shimmer_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmerCompanyLocation" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</com.facebook.shimmer.ShimmerFrameLayout>

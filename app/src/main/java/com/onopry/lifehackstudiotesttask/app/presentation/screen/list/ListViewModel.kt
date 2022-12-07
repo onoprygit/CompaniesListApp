@@ -43,7 +43,7 @@ class ListViewModel @Inject constructor(
                 is ApiError -> {
                     isRefreshMutableStateFlow.emit(false)
                     screenStateMutableFlow.emit(
-                        ListState.ErrorState.LoadingError(
+                        ListState.Error(
                             msg = "Oops, unexpected error with code ${result.code}: \n${result.message}"
                         )
                     )

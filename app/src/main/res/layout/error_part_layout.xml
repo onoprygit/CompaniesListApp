@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,27 +10,26 @@
         android:layout_width="350dp"
         android:layout_height="350dp"
         android:src="@drawable/img_error_box"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="ContentDescription"
         android:visibility="gone"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/errorMessageTv"
         android:layout_width="230dp"
         android:layout_height="100dp"
-        android:textSize="20sp"
+        android:gravity="center|top"
         android:rotation="-10"
         android:textColor="@color/white"
-        android:gravity="center|top"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/errorImage"
         app:layout_constraintEnd_toEndOf="@id/errorImage"
         app:layout_constraintStart_toStartOf="@id/errorImage"
         app:layout_constraintTop_toTopOf="@id/errorImage"
-        app:layout_constraintBottom_toBottomOf="@id/errorImage"
-        android:visibility="gone"
         tools:text="Unexpected error occurred" />
 
     <Button
@@ -40,8 +38,8 @@
         android:layout_height="wrap_content"
         android:text="@string/reload_after_error_button"
         android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/errorImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/errorImage" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

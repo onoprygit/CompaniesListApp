@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginVertical="@dimen/item_margin_vertical"
-    tools:ignore="ContentDescription"
-    >
+    tools:ignore="ContentDescription">
 
     <ImageView
         android:id="@+id/companyImage"
         android:layout_width="@dimen/company_image_list_size"
         android:layout_height="@dimen/company_image_list_size"
+        android:background="@drawable/bg_company_image_item"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@drawable/bg_company_image_item"
-        tools:src="@drawable/placeholder_company"
-        android:scaleType="centerCrop"
-        />
+        tools:src="@drawable/placeholder_company" />
 
     <TextView
         android:id="@+id/companyName"
+        style="@style/ItemCompanyName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/companyImage"
         app:layout_constraintStart_toEndOf="@id/companyImage"
         app:layout_constraintTop_toTopOf="@id/companyImage"
-        app:layout_constraintBottom_toBottomOf="@id/companyImage"
-        tools:text="@tools:sample/cities"
-        style="@style/ItemCompanyName"
-        />
+        tools:text="@tools:sample/cities" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

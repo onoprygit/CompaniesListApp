@@ -32,4 +32,9 @@
         <item name="android:layout_marginStart">@dimen/base_horizontal_offset</item>
         <item name="android:background">@color/shimmer_background</item>
     </style>
+
+    <style name="AppToolbar">
+        <item name="android:background">@color/purple_500</item>
+        <item name="titleTextColor">@color/white</item>
+    </style>
 </resources>

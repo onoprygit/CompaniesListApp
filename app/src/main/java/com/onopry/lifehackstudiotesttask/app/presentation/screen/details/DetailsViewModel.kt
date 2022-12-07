@@ -2,6 +2,7 @@ package com.onopry.lifehackstudiotesttask.app.presentation.screen.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.onopry.lifehackstudiotesttask.app.presentation.utils.debugLog
 import com.onopry.lifehackstudiotesttask.data.repository.Repository
 import com.onopry.lifehackstudiotesttask.data.utils.ApiError
 import com.onopry.lifehackstudiotesttask.data.utils.ApiException
@@ -50,14 +51,16 @@ class DetailsViewModel @Inject constructor(
                             result.data.copy(phone = phone, www = website, address = address)
                         screenStateMutableFlow.emit(DetailsState.Content(newResult))
                     }
-                    is ApiError -> screenStateMutableFlow.emit(
-                        DetailsState.ErrorState.LoadingError(
-                            msg = result.message ?: "Unexpected error occurred"
+                    is ApiError -> {
+                        screenStateMutableFlow.emit(
+                            DetailsState.Error(
+                                msg = "Unexpected error: ${result.message} with code: ${result.code}"
+                            )
                         )
-                    )
+                    }
                     is ApiException -> screenStateMutableFlow.emit(
-                        DetailsState.ErrorState.LoadingError(
-                            msg = result.e.message ?: "Unexpected exception occurred"
+                        DetailsState.Exception(
+                            msg = "Exception: ${result.e.message ?: "Unexpected exception occurred"}"
                         )
                     )
                 }
@@ -66,7 +69,7 @@ class DetailsViewModel @Inject constructor(
         }
     }
 
-    fun refresh(){
+    fun refresh() {
         loadDetails()
     }
 
@@ -77,6 +80,10 @@ class DetailsViewModel @Inject constructor(
 
     init {
         screenStateMutableFlow.onEach { state ->
+            debugLog(
+                "details screen state is [${state::class.java.simpleName}]",
+                "DetailsViewModel"
+            )
             if (state is DetailsState.Content) {
                 val lat = state.company.lat
                 val lon = state.company.lon

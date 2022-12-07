@@ -64,7 +64,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
                 when (state) {
                     is DetailsState.Loading -> handleLoadingState()
                     is DetailsState.Content -> handleContentState(state.company)
-                    is DetailsState.ErrorState.LoadingError -> handleErrorState(state.msg)
+                    is DetailsState.Error -> handleErrorState(state.msg)
                     is DetailsState.Exception -> handleExceptionState(state)
                 }
             }
@@ -122,12 +122,18 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
     private fun handleLoadingState() {
         binding.contentLayout.hide()
+        with(binding.errorPart) {
+            errorMessageTv.gone()
+            errorImage.gone()
+            tryAgainButton.gone()
+        }
         binding.shimmerPlace.shimmer.startShimmer()
         binding.shimmerPlace.shimmer.show()
     }
 
     private fun handleErrorState(errorMessage: String) {
-        binding.contentLayout.hide()
+        binding.contentLayout.gone()
+        binding.shimmerPlace.shimmer.gone()
         with(binding.errorPart) {
             errorImage.show()
             errorMessageTv.show()
@@ -141,11 +147,12 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
     }
 
     private fun handleExceptionState(state: DetailsState.Exception) {
-        binding.contentLayout.hide()
+        binding.contentLayout.gone()
+        binding.shimmerPlace.shimmer.gone()
         with(binding.errorPart) {
             errorImage.show()
             errorMessageTv.show()
-            tryAgainButton.show()
+            tryAgainButton.gone()
 
             errorMessageTv.text = state.msg
         }
